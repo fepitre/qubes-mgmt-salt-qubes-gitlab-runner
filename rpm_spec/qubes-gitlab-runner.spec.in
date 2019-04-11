@@ -1,0 +1,42 @@
+Name:		qubes-mgmt-salt-qubes-gitlab-runner
+Version:	@VERSION@
+Release:	1%{?dist}
+Summary:	Create Gitlab Runner VMs in Qubes OS
+
+Group:		System administration tools
+License:	GPL 2.0
+BuildArch:  noarch
+URL:		https://www.qubes-os.org/
+Source:	%{name}-%{version}.tar.gz
+
+Requires:	qubes-mgmt-salt
+Requires:	qubes-mgmt-salt-qubes-infrastructure
+
+%description
+
+
+%prep
+%setup -q
+
+%build
+
+%install
+make install DESTDIR=%{buildroot} LIBDIR=%{_libdir} BINDIR=%{_bindir} SBINDIR=%{_sbindir} SYSCONFDIR=%{_sysconfdir}
+
+
+%files
+%defattr(-,root,root)
+%doc LICENSE README.md
+%attr(750, root, root) %dir /srv/formulas/base/qubes-gitlab-runner
+/srv/formulas/base/qubes-gitlab-runner/README.md
+/srv/formulas/base/qubes-gitlab-runner/LICENSE
+/srv/formulas/base/qubes-gitlab-runner/gitlab-ci
+
+%attr(750, root, root) %dir /srv/pillar/base/gitlab-ci
+%config(noreplace) /srv/pillar/base/gitlab-ci/init.sls
+%config(noreplace) /srv/pillar/base/gitlab-ci/init.top
+
+%config(noreplace) /etc/salt/minion.d/qubes-gitlab-runner.conf
+
+%changelog
+@CHANGELOG@

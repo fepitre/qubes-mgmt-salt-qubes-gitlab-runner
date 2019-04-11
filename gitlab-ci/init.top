@@ -1,0 +1,16 @@
+base:
+    dom0:
+        - gitlab-ci.dom0
+    {{ salt['pillar.get']('gitlab-ci:keys-template', 'fedora-29-minimal') }}:
+        - build-infra.template-keys
+# Configure TemplateVM Gitlab Runner
+    {{ salt['pillar.get']('gitlab-ci:build-template', 'gitlab-runner-fedora') }}:
+        - gitlab-ci.template-runner
+        - build-infra.template-build
+# Configure AppVM Gitlab Runner
+{%- for runner in salt['pillar.get']('gitlab-ci:runners', []) %}
+    build-{{runner}}:
+        - gitlab-ci.build-vm
+{%- endfor %}
+    keys-gitlab-ci:
+        - gitlab-ci.keys-vm
