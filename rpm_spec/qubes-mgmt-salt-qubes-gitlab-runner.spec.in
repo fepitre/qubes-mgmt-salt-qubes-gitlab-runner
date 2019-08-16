@@ -10,7 +10,7 @@ URL:		https://www.qubes-os.org/
 Source:	%{name}-%{version}.tar.gz
 
 Requires:	qubes-mgmt-salt
-Requires:	qubes-mgmt-salt-qubes-infrastructure
+Requires:	qubes-mgmt-salt-dom0-qubes-infrastructure
 
 %description
 
