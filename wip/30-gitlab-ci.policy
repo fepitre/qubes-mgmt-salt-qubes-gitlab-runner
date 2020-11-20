@@ -1,0 +1,13 @@
+
+admin.vm.Kill           *   gitlab-ci-sureau    @tag:created-by-gitlab-ci-sureau allow
+admin.vm.Start          *   gitlab-ci-sureau    @tag:created-by-gitlab-ci-sureau allow
+admin.vm.Shutdown       *   gitlab-ci-sureau    @tag:created-by-gitlab-ci-sureau allow
+admin.vm.Remove         *   gitlab-ci-sureau    @tag:created-by-gitlab-ci-sureau allow
+admin.vm.CurrentState   *   gitlab-ci-sureau    @tag:created-by-gitlab-ci-sureau allow
+admin.vm.Create.DispVM  *   gitlab-ci-sureau    @adminvm                         allow target=dom0
+admin.label.List        *   gitlab-ci-sureau    dom0                             allow
+admin.vm.List           *   gitlab-ci-sureau    dom0                             allow
+admin.vm.List           *   gitlab-ci-sureau    @tag:created-by-gitlab-ci-sureau allow target=dom0
+admin.Events            *   gitlab-ci-sureau    dom0                             allow
+admin.Events            *   gitlab-ci-sureau    @tag:created-by-gitlab-ci-sureau allow target=dom0
+qubes.VMShell           *   gitlab-ci-sureau    @tag:created-by-gitlab-ci-sureau allow target=dom0

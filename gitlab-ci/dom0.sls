@@ -1,5 +1,5 @@
 # Install Fedora minimal template
-qubes-template-{{ salt['pillar.get']('gitlab-ci:keys-template', 'fedora-29-minimal') }}:
+qubes-template-{{ salt['pillar.get']('gitlab-ci:keys-template', 'fedora-32-minimal') }}:
   pkg.installed
 
 # Create Gitlab Runner template from Fedora template
