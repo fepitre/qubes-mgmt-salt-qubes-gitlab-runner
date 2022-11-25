@@ -1,16 +1,23 @@
+{% set any_builderv2 = salt['pillar.get']('gitlab-ci:runners', {}).values() | selectattr('builderv2', 'defined') | list %}
 base:
     dom0:
         - gitlab-ci.dom0
-    {{ salt['pillar.get']('gitlab-ci:keys-template', 'fedora-29-minimal') }}:
-        - build-infra.template-keys
-# Configure TemplateVM Gitlab Runner
-    {{ salt['pillar.get']('gitlab-ci:build-template', 'gitlab-runner-fedora') }}:
-        - gitlab-ci.template-runner
+    {{ salt['pillar.get']('gitlab-ci:build-template', 'fedora-36') }}:
         - build-infra.template-build
-# Configure AppVM Gitlab Runner
-{%- for runner in salt['pillar.get']('gitlab-ci:runners', []) %}
-    build-{{runner}}:
+        - gitlab-ci.template-vm
+    {{ salt['pillar.get']('gitlab-ci:keys-template', 'fedora-36') }}:
+        - build-infra.template-keys
+{% if any_builderv2 %}
+    builder-dvm:
+      - build-infra.builder-dvm
+{% endif %}
+{% for runner_name, runner_config in salt['pillar.get']('gitlab-ci:runners', {}).items() %}
+    {% set builderv2 = salt['pillar.get']('gitlab-ci:runners:' + runner_name + ':builderv2', False) %}
+    {{runner_name}}:
         - gitlab-ci.build-vm
-{%- endfor %}
+      {%- if builderv2 %}
+        - build-infra.mkmetalink
+      {% endif %}
+{% endfor %}
     keys-gitlab-ci:
         - gitlab-ci.keys-vm

@@ -1,12 +1,12 @@
 [Unit]
 Description=GitLab Runner
 After=syslog.target network.target
-ConditionFileIsExecutable=/usr/lib/gitlab-runner/gitlab-runner
+ConditionFileIsExecutable=/usr/local/bin/gitlab-runner
 
 [Service]
 StartLimitInterval=5
 StartLimitBurst=10
-ExecStart=/usr/lib/gitlab-runner/gitlab-runner "run" "--working-directory" "/home/user" "--config" "/home/user/.gitlab-runner/config.toml" "--service" "gitlab-runner" "--syslog" "--user" "user"
+ExecStart=/usr/local/bin/gitlab-runner "run" "--working-directory" "/home/user" "--config" "/home/user/.gitlab-runner/config.toml" "--service" "gitlab-runner" "--syslog" "--user" "user"
 
 Restart=always
 RestartSec=120

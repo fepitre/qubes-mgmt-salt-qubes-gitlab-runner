@@ -1,0 +1,23 @@
+runner-dependencies:
+  pkg.installed:
+    - pkgs:
+      - python3-pip
+      - python3-pytest
+      - python3-pytest-cov
+      - python3-packaging
+      - createrepo_c
+      - devscripts
+      - gpg
+      - qubes-gpg-split
+      - python3-pyyaml
+      - rpm
+      - docker
+      - python3-docker
+      - podman
+      - python3-podman
+      - reprepro
+      - python3-pathspec
+      - rpm-sign
+      - mktorrent
+      - openssl
+      - tree
